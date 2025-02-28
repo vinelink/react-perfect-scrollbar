@@ -1,4 +1,4 @@
-import PerfectScrollbar from "perfect-scrollbar";
+import PerfectScrollbar from 'perfect-scrollbar';
 import {
   type JSX,
   useRef,
@@ -6,44 +6,51 @@ import {
   createElement,
   forwardRef,
   useImperativeHandle,
-  useCallback,
   useMemo,
-} from "react";
+} from 'react';
 import {
   PS_EVENTS_NAME_MAP,
   type PSEventNameType,
   type PSEventListenersType,
-} from "./events";
+} from './events';
+import useMemoizedFn from './utils/useMemoizedFn';
 
-const CLASS_NAME = "react-perfect-scrollbar-container";
+const CLASS_NAME = 'react-perfect-scrollbar-container';
 
-interface ContainerProps<TagName extends keyof JSX.IntrinsicElements = "div">
-  extends React.HTMLAttributes<TagName>,
+const PS_EVENTS_NAME_MAP_ENTRIES = Object.entries(PS_EVENTS_NAME_MAP);
+
+export interface ContainerProps<
+  TagName extends keyof JSX.IntrinsicElements = 'div',
+> extends React.HTMLAttributes<TagName>,
     PSEventListenersType {
   children?: React.ReactNode;
   tagName?: TagName;
   options?: PerfectScrollbar.Options;
 }
 
-interface ContainerRef {
-  ps: PerfectScrollbar | null;
+export interface ContainerRef {
+  psRef: React.RefObject<PerfectScrollbar | null>;
   containerRef: React.RefObject<Element | null>;
 }
 
 const Container = forwardRef(
-  <TagName extends keyof JSX.IntrinsicElements = "div">(
+  <TagName extends keyof JSX.IntrinsicElements = 'div'>(
     {
       children,
-      tagName = "div" as TagName,
+      tagName = 'div' as TagName,
       options = {},
       className,
       ...props
     }: ContainerProps<TagName>,
-    ref: React.Ref<ContainerRef>
+    ref: React.ForwardedRef<ContainerRef>,
   ) => {
     const containerRef = useRef<Element>(null);
-
     const psRef = useRef<PerfectScrollbar | null>(null);
+
+    useImperativeHandle(ref, () => ({
+      psRef,
+      containerRef,
+    }));
 
     const resizeObserver = useRef<ResizeObserver | null>(null);
 
@@ -55,7 +62,7 @@ const Container = forwardRef(
       return `${CLASS_NAME} ${className}`;
     }, [className]);
 
-    const setupResizeObserver = useCallback(() => {
+    const setupResizeObserver = useMemoizedFn(() => {
       if (containerRef.current) {
         resizeObserver.current = new ResizeObserver(() => {
           if (psRef.current) {
@@ -68,55 +75,50 @@ const Container = forwardRef(
       return () => {
         resizeObserver.current?.disconnect();
       };
-    }, []);
+    });
 
-    const setupEventListeners = useCallback(() => {
-      Object.entries(PS_EVENTS_NAME_MAP).forEach(
-        ([rEventName, psEventName]) => {
-          const existingListener =
-            eventListeners.current[rEventName as PSEventNameType];
-          if (existingListener && containerRef.current) {
-            containerRef.current.removeEventListener(
-              psEventName,
-              existingListener as EventListener
-            );
-          }
+    const setupEventListeners = useMemoizedFn(() => {
+      for (const [rEventName, psEventName] of PS_EVENTS_NAME_MAP_ENTRIES) {
+        const existingListener =
+          eventListeners.current[rEventName as PSEventNameType];
+        if (existingListener && containerRef.current) {
+          containerRef.current.removeEventListener(
+            psEventName,
+            existingListener as EventListener,
+          );
         }
-      );
+      }
 
       eventListeners.current = {};
 
       if (containerRef.current) {
-        Object.entries(PS_EVENTS_NAME_MAP).forEach(
-          ([rEventName, psEventName]) => {
-            const listener = props[rEventName as PSEventNameType];
-            if (listener) {
-              containerRef.current?.addEventListener(
-                psEventName,
-                listener as EventListener
-              );
-              eventListeners.current[rEventName as PSEventNameType] = listener;
-            }
+        for (const [rEventName, psEventName] of PS_EVENTS_NAME_MAP_ENTRIES) {
+          const listener = props[rEventName as PSEventNameType];
+          if (listener) {
+            containerRef.current?.addEventListener(
+              psEventName,
+              listener as EventListener,
+            );
+            eventListeners.current[rEventName as PSEventNameType] = listener;
           }
-        );
+        }
       }
 
       return () => {
-        Object.entries(PS_EVENTS_NAME_MAP).forEach(
-          ([rEventName, psEventName]) => {
-            const listener =
-              eventListeners.current[rEventName as PSEventNameType];
-            if (listener && containerRef.current) {
-              containerRef.current.removeEventListener(
-                psEventName,
-                listener as EventListener
-              );
-            }
+        for (const [rEventName, psEventName] of PS_EVENTS_NAME_MAP_ENTRIES) {
+          const listener =
+            eventListeners.current[rEventName as PSEventNameType];
+          if (listener && containerRef.current) {
+            containerRef.current.removeEventListener(
+              psEventName,
+              listener as EventListener,
+            );
           }
-        );
+        }
+
         eventListeners.current = {};
       };
-    }, [props]);
+    });
 
     useEffect(() => {
       const disconnectObservers = setupResizeObserver();
@@ -139,20 +141,15 @@ const Container = forwardRef(
       };
     }, [options]);
 
-    useImperativeHandle(ref, () => ({
-      ps: psRef.current,
-      containerRef: containerRef,
-    }));
-
     return createElement(tagName, {
       ref: containerRef,
       className: cls,
       ...props,
       children,
     });
-  }
+  },
 );
 
-Container.displayName = "Container";
+Container.displayName = 'Container';
 
 export default Container;

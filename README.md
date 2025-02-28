@@ -23,7 +23,7 @@ import "@vinelink/react-prefect-scrollbar/style.css";
 
 <Container>
   <div style={{ height: "9999px" }} />
-</Container>
+</Container>;
 ```
 
 ## Options
@@ -31,11 +31,12 @@ import "@vinelink/react-prefect-scrollbar/style.css";
 The `Container` component accepts all options supported by `perfect-scrollbar`.
 
 ```tsx
-<Container options={{
-  theme: "minimal-dark",
-  suppressScrollX: true,
-  // ... other options
-}}
+<Container
+  options={{
+    theme: "minimal-dark",
+    suppressScrollX: true,
+    // ... other options
+  }}
 />
 ```
 
@@ -44,8 +45,8 @@ The `Container` component accepts all options supported by `perfect-scrollbar`.
 The `Container` component emits all events supported by `perfect-scrollbar`.
 
 ```tsx
-<Container 
-  onScroll={() => console.log("scrolled")} 
+<Container
+  onScroll={() => console.log("scrolled")}
   onScrollEnd={() => console.log("scroll ended")}
   // ... other events
 />

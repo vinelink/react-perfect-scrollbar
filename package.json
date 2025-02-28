@@ -16,13 +16,21 @@
   ],
   "scripts": {
     "build": "rslib build",
-    "dev": "rslib build --watch"
+    "dev": "rslib build --watch",
+    "storybook": "storybook dev -p 6006"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@rsbuild/core": "^1.2.12",
     "@rsbuild/plugin-react": "^1.1.1",
     "@rslib/core": "^0.5.2",
+    "@storybook/addon-essentials": "^8.6.2",
+    "@storybook/test": "^8.6.2",
     "@types/react": "^19.0.10",
     "react": "^19.0.0",
+    "storybook": "^8.6.2",
+    "storybook-addon-rslib": "^1.0.0",
+    "storybook-react-rsbuild": "^1.0.0",
     "typescript": "^5.7.3"
   },
   "peerDependencies": {
