@@ -1,0 +1,35 @@
+{
+  "name": "@vinelink/react-prefect-scrollbar",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rslib build",
+    "dev": "rslib build --watch"
+  },
+  "devDependencies": {
+    "@rsbuild/plugin-react": "^1.1.1",
+    "@rslib/core": "^0.5.2",
+    "@types/react": "^19.0.10",
+    "react": "^19.0.0",
+    "typescript": "^5.7.3"
+  },
+  "peerDependencies": {
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0"
+  },
+  "dependencies": {
+    "perfect-scrollbar": "^1.5.6"
+  }
+}

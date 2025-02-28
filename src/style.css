@@ -1,0 +1,6 @@
+@import "perfect-scrollbar/css/perfect-scrollbar.css";
+
+.react-perfect-scrollbar-container {
+  position: relative;
+  height: 100%;
+}
