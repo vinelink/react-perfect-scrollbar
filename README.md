@@ -51,3 +51,16 @@ The `Container` component emits all events supported by `perfect-scrollbar`.
   // ... other events
 />
 ```
+
+## Hooks
+
+The `useContainer` hook provides access to the `perfect-scrollbar` instance and the container element.
+
+```tsx
+const ref = useRef<ContainerRef>(null);
+const { getPsInstance, getContainer } = useContainer(ref);
+
+<Container ref={ref}>
+  <div style={{ height: "9999px" }} />
+</Container>;
+```
