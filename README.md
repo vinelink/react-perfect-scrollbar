@@ -1,5 +1,8 @@
 # React Perfect Scrollbar
 
+[![npm version](https://img.shields.io/npm/v/@vinelink/react-perfect-scrollbar.svg?style=for-the-badge)](https://www.npmjs.com/package/@vinelink/react-perfect-scrollbar)
+[![downloads](https://img.shields.io/npm/dm/@vinelink/react-perfect-scrollbar.svg?style=for-the-badge&color=blue)](https://npm-stat.com/charts.html?package=%40vinelink%2Freact-perfect-scrollbar)
+
 A React component wrapper for [perfect-scrollbar](https://github.com/mdbootstrap/perfect-scrollbar).
 
 ## Features
@@ -12,14 +15,14 @@ A React component wrapper for [perfect-scrollbar](https://github.com/mdbootstrap
 ## Installation
 
 ```bash
-npm install @vinelink/react-prefect-scrollbar
+npm install @vinelink/react-perfect-scrollbar
 ```
 
 ## Usage
 
 ```tsx
-import { Container } from "@vinelink/react-prefect-scrollbar";
-import "@vinelink/react-prefect-scrollbar/style.css";
+import { Container } from "@vinelink/react-perfect-scrollbar";
+import "@vinelink/react-perfect-scrollbar/style.css";
 
 <Container>
   <div style={{ height: "9999px" }} />
