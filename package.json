@@ -3,6 +3,18 @@
   "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vinelink/react-prefect-scrollbar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vinelink/react-prefect-scrollbar/issues"
+  },
+  "homepage": "https://github.com/vinelink/react-prefect-scrollbar#readme",
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/vinelink"
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -11,9 +23,7 @@
   },
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "build": "rslib build",
     "dev": "rslib build --watch",
