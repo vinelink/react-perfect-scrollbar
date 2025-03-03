@@ -1,16 +1,16 @@
 {
-  "name": "@vinelink/react-prefect-scrollbar",
+  "name": "@vinelink/react-perfect-scrollbar",
   "version": "0.1.1",
   "type": "module",
   "main": "./dist/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vinelink/react-prefect-scrollbar.git"
+    "url": "git+https://github.com/vinelink/react-perfect-scrollbar.git"
   },
   "bugs": {
-    "url": "https://github.com/vinelink/react-prefect-scrollbar/issues"
+    "url": "https://github.com/vinelink/react-perfect-scrollbar/issues"
   },
-  "homepage": "https://github.com/vinelink/react-prefect-scrollbar#readme",
+  "homepage": "https://github.com/vinelink/react-perfect-scrollbar#readme",
   "funding": {
     "type": "github",
     "url": "https://github.com/sponsors/vinelink"
